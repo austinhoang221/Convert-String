@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div class="middle">
+        <input type="text" class="form__input" id="input" placeholder="Nhập" required="" />
+        <br>
+        <div class="result">Kết quả</div>
+        <div id="result" class="result"></div>
+    </div>
+    <br/>
+    <script>
+        const element = document.getElementById("input");
+        const resultElement = document.getElementById("result");
+        element.addEventListener("keypress", function(e) {
+            if(e.key === "Enter"){
+
+                convert(element.value);
+            }
+        });
+        function convert(input) {
+    const result = [];
+    let counter = 0;
+    for (let i = 0; i < input.length; i++) {
+        const temp = input[i];
+        counter++;
+        if (temp === "," || !input[i + 1]) break;
+        else if ((input[i + 1] !== counter.toString()
+            || input[i + 2] === "," || input[i + 2] === counter.toString() || input[i + 3] === counter.toString()) && input[i + 1] !== ",") {
+            result.push([temp, input[i + 1]]);
+            i++;
+        }
+        else if (input[i + 1] === counter.toString()) continue;
+
+        for (let j = i + 1; j < input.length; j++) {
+
+            if (input[j] === ",") {
+                result.push([temp, input[j + 1]]);
+            }
+            else if (input[j - 1] !== "," && input[j + 1] !== ",") {
+                i = j - 1;
+                break
+            }
+
+        }
+    }
+    const final = result.map(pair => pair.join("")).join(" ");
+    resultElement.innerText = final;
+    return final;
+}
+
+    </script>
+</body>
+</html>
