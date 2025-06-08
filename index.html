@@ -41,7 +41,6 @@
 
     const lis = container.querySelectorAll('ul li');
     lis.forEach(li => {
-        debugger
         const ps = li.querySelectorAll('p');
         if (ps.length !== 2) return;
 
@@ -49,6 +48,8 @@
         let acc = '';
         const arr = ps[1].innerText.split(',');
         for(let i = 0; i < arr.length; i++){
+         acc += ' '
+
             acc += head + arr[i]
         }
         result.push(acc);
